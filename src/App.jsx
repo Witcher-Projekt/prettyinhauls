@@ -1,20 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaYoutube, FaInstagram } from "react-icons/fa";
 import { ShoppingBag } from "lucide-react";
 
 export default function App() {
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const res = await fetch("https://formspree.io/f/mvoevwpz", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    if (res.ok) window.location.href = "/thank-you";
-  };
-
   return (
     <main className="min-h-screen bg-pink-50 text-gray-800 flex flex-col items-center justify-center p-4">
       <style>{`
@@ -36,22 +24,6 @@ export default function App() {
         <p className="text-xl text-pink-400 mb-6">
           PrettyInHauls is getting ready to launch the cutest collection of fashion & beauty!
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            className="px-4 py-2 rounded-md border border-pink-300 w-64 text-center"
-          />
-          <button
-            type="submit"
-            className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 text-lg rounded-full shadow-md animate-[float_3s_ease-in-out_infinite]"
-          >
-            Subscribe 💌
-          </button>
-        </form>
       </section>
 
       <section className="mt-16 text-center">
