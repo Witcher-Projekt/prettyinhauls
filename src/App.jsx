@@ -4,7 +4,6 @@ import { ShoppingBag } from "lucide-react";
 
 export default function App() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,20 +12,19 @@ export default function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
     });
-    if (res.ok) setSubmitted(true);
+    if (res.ok) window.location.href = "/thank-you";
   };
 
   return (
     <main className="min-h-screen bg-pink-50 text-gray-800 flex flex-col items-center justify-center p-4">
-      <style>
-        {`
-          @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0); }
-          }
-        `}
-      </style>
+      <style>{`
+        @keyframes float {
+          0% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
+          100% { transform: translateY(0); }
+        }
+      `}</style>
+
       <header className="w-full flex items-center justify-between py-4 border-b border-pink-200">
         <div className="flex items-center gap-2 text-xl font-bold">
           <ShoppingBag className="h-6 w-6 text-pink-500 animate-bounce" /> PrettyInHauls
@@ -38,26 +36,22 @@ export default function App() {
         <p className="text-xl text-pink-400 mb-6">
           PrettyInHauls is getting ready to launch the cutest collection of fashion & beauty!
         </p>
-        {!submitted ? (
-          <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="px-4 py-2 rounded-md border border-pink-300 w-64 text-center"
-            />
-            <button
-              type="submit"
-              className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 text-lg rounded-full shadow-md animate-[float_3s_ease-in-out_infinite]"
-            >
-              Subscribe 💌
-            </button>
-          </form>
-        ) : (
-          <p className="text-green-600 text-lg">Thanks for subscribing! 🎉</p>
-        )}
+        <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            className="px-4 py-2 rounded-md border border-pink-300 w-64 text-center"
+          />
+          <button
+            type="submit"
+            className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 text-lg rounded-full shadow-md animate-[float_3s_ease-in-out_infinite]"
+          >
+            Subscribe 💌
+          </button>
+        </form>
       </section>
 
       <section className="mt-16 text-center">
